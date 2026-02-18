@@ -54,14 +54,18 @@ const nextConfig = {
   reactStrictMode: false,
   compress: true,
   poweredByHeader: false,
-  swcMinify: true,
+  // Turbopack root helps Next infer the correct workspace root when multiple lockfiles exist
+  turbopack: {
+    root: './',
+  },
 }
 
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
+  // Disable PWA during local development and when building on Netlify
+  disable: process.env.NODE_ENV === 'development' || process.env.NETLIFY === 'true',
 });
 
 module.exports = withPWA(nextConfig);
