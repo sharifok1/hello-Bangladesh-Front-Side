@@ -54,7 +54,7 @@ const nextConfig = {
   reactStrictMode: false,
   compress: true,
   poweredByHeader: false,
-  swcMinify: true,
+  // swcMinify: true, // Removed: Next.js 13+ uses SWC minification by default
 }
 
 const withPWA = require('next-pwa')({
