@@ -3,12 +3,14 @@
 // - Proxies request to BACKEND_URL (env) or package.json proxy (default to http://127.0.0.1:8000)
 // - Returns safe JSON fallbacks for known endpoints when backend is down
 
+import { BACKEND_URL } from '@/lib/urlUtils';
+
 const CACHE_TTL_MS = 30 * 1000; // 30 seconds
 const cache = new Map();
 
 const getBackendUrl = () => {
   // Allow overriding via env in production
-  if (process.env.BACKEND_URL) return process.env.BACKEND_URL.replace(/\/$/, '');
+  if (BACKEND_URL) return BACKEND_URL.replace(/\/$/, '');
   // fallback to proxy defined in package.json or localhost
   try {
     // eslint-disable-next-line no-undef
