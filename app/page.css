@@ -1,0 +1,242 @@
+/* SECTION BACKGROUND */
+.news-slider-section {
+  background: #893E9C; /* purple background */
+}
+
+/* CARD */
+.news-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  gap: 16px;
+  padding: 14px;
+  box-shadow: 0 2px 5px rgba(116, 115, 115, 0.096);
+  justify-content: center;
+  align-items: center;
+}
+
+/* IMAGE */
+.news-image{
+  /* object-fit: cover; */
+  border-radius: 6px;
+}
+
+/* CONTENT */
+.news-content{
+  flex: 1;
+}
+
+/* CATEGORY BADGE */
+.news-category {
+  display: inline-block;
+  background: #f9d2d2;
+  color: #000000;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+/* TITLE */
+.news-title {
+  font-weight: 400;
+  line-height: 1.4;
+  color: #222;
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+/* DATE */
+.news-date {
+  font-size: 12px;
+  color: #888;
+}
+
+/* NAVIGATION ARROWS */
+.newsSwiper .swiper-button-prev,
+.newsSwiper .swiper-button-next {
+  background: #ff0000;
+  width: 36px;
+  height: 65px;
+  padding: 15px 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border-radius: 6px;
+  margin-top: -40px;
+}
+@media screen and (max-width:764px) {
+  /* NAVIGATION ARROWS */
+.newsSwiper .swiper-button-prev,
+.newsSwiper .swiper-button-next {
+  background: #ff0000;
+  width: 28px;
+  height: 46px;
+  padding: 15px 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border-radius: 6px;
+  margin-top: -30px;
+}
+}
+
+.newsSwiper .swiper-button-prev::after,
+.newsSwiper .swiper-button-next::after {
+  font-size: 12px;
+  color: #ffffff !important;
+  fill: #888 !important;
+}
+.newsSwiper .swiper-button-prev svg path,
+.newsSwiper .swiper-button-next svg path{
+    fill: #ffffff !important;
+    width: 14px !important;
+    size: 14px;
+    font-size: 14px;
+}
+
+.swiper-button-prev svg,
+.swiper-button-next svg{
+    width: 14px !important; 
+}
+
+.swiper-pagination-bullet{
+  position: relative;
+  width: 8px;
+  height: 8px;
+}
+.swiper-pagination-bullet.swiper-pagination-bullet-active{
+  width: 40px;
+  border-radius: 5px !important;
+  background-color: #ffffff;
+}
+
+
+.news-card-heading-transparent{
+  position:absolute;
+  bottom: 0;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/*---------------------- multimedia section// -------------------*/
+.multimedia_swiper_slide {
+  position: relative;
+  padding-bottom: 50px;
+}
+
+/* Common style */
+.multimedia_swiper_slide .swiper-button-prev,
+.multimedia_swiper_slide .swiper-button-next {
+  top: auto !important;
+  bottom: 2px;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+}
+
+/* Left arrow < */
+.multimedia_swiper_slide .swiper-button-prev {
+  right: 56px !important; /* next এর বাম পাশে */
+  left: auto !important;
+}
+
+/* Right arrow > */
+.multimedia_swiper_slide .swiper-button-next {
+  right: 12px;
+}
+
+/* ----------------------sahitto------------------------------------------- */
+.shitto-section-header {
+  background-image: url('https://dev.hellobd.news/storage/media/sahitto-line_2026-02-01_08-59-17_LOBarCKf.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.shitto-section-footer {
+  background-image: url('https://dev.hellobd.news/storage/media/sahittoline-2_2026-02-01_08-59-40_SPLaDXKw.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+
+/* All mobile swiper js// */
+.mobile-swiper .swiper-pagination-progressbar-fill{
+ background:#ff0000 !important;
+}
+
+.mobile-swiper .swiper-button-prev{
+  position: relative;
+
+}
+.mobile-swiper .swiper-button-prev::after{
+  content:'⤎';
+  color: #ee1f1f;
+  bottom: 593px;
+  position: relative;
+  right: -350px;
+}
+
+.mobile-swiper .swiper-button-next::after{
+  content:'⤏';
+  color: #ee1f1f;
+  top: -255px;
+  position: relative;
+  right: 0px;
+}
+@media only screen and (max-width:764px) {
+  .mobile-swiper .swiper-button-prev::after{
+  right: -800%;
+  }
+}
+@media only screen and (max-width:480px) {
+  .mobile-swiper .swiper-button-prev::after{
+  right: -310px;
+  }
+}
+@media only screen and (max-width:440px) {
+  .mobile-swiper .swiper-button-prev::after{
+  right: -270px;
+  }
+}
+@media only screen and (max-width:400px) {
+  .mobile-swiper .swiper-button-prev::after{
+  right: -250px;
+  }
+}
+@media only screen and (max-width:375px) {
+  .mobile-swiper .swiper-button-prev::after{
+  right: -225px;
+  }
+}
+@media only screen and (max-width:350px) {
+  .mobile-swiper .swiper-button-prev::after{
+  right: -170px;
+  }
+}
+@media only screen and (max-width:300px) {
+  .mobile-swiper .swiper-button-prev::after{
+  right: -160px;
+  }
+}
+/* @media screen and (max-width:410px) {
+  .mobile-swiper .swiper-button-prev::after{
+  right: -220px;
+  }
+} */
+
+.mobile-swiper .swiper-button-prev::after,
+.mobile-swiper .swiper-button-next::after {
+  font-size: 30px;
+  background-color: #fff;
+  text-align: center;
+  height: 40px;
+  padding-top: 0px;
+  width: 100px;
+  border-radius:20%;
+}
+.mobile-swiper .swiper-button-prev svg path,
+.mobile-swiper .swiper-button-next svg path{
+    fill: #ed0d0d !important;
+    width: 14px !important;
+    font-size: 18px;
+    display: none;
+}

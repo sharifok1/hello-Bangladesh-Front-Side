@@ -1,0 +1,51 @@
+# dependencies
+node_modules/
+node_modules
+page_backup/
+
+# next.js
+.next/
+out/
+build/
+.next
+out
+
+# testing
+coverage/
+
+# logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files
+.env*
+.env.local
+!.env.example
+.env.sentry-build-plugin
+
+# vercel
+.vercel/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+.vscode
+
+# OS
+.DS_Store
+Thumbs.db
+
+# misc
+*.pem
+*.swp
+*.swo
+
+# Sentry Config File
+.env.sentry-build-plugin

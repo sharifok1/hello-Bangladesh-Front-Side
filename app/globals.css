@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apply globally */
+body {
+  font-family: 'Noto Sans Bengali', 'Noto Sans', sans-serif;
+  -webkit-overflow-scrolling: touch;
+}
+/* Ensure form controls and common elements use the same font */
+input, textarea, select, button, a, p, h1, h2, h3, h4, h5, h6, div, span {
+  font-family: 'Noto Sans Bengali', 'Noto Sans', sans-serif;
+}
+html {
+  overflow-y: scroll;
+  /* scrollbar-width: none; */
+  /* -ms-overflow-style: none;  */
+}
+
+/* html::-webkit-scrollbar {
+  display: none; 
+} */
+
+.news-item {
+  transition: all 0.2s ease;
+}
+
+.news-item:hover {
+  transform: translateY(-2px);
+}
+
+.news-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #1c1e20;
+}
+
+.news-title:hover {
+  color: #2A2A86;
+}
+
+.news-time {
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin-top: 0.5rem;
+}
+
+.news-image {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  /* flex-shrink: 0; */
+}
+
+/* author image// */
+.single_page_autor_img{
+  border-radius: 100%;
+}
+
+/* Utility classes for explicit weights (useful when you need a specific weight)
+   Usage: add `noto-w-400` to apply 400 weight, or use the named classes below */
+.noto-w-100 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 100; }
+.noto-w-200 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 200; }
+.noto-w-300 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 300; }
+.noto-w-400 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 400; }
+.noto-w-500 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 500; }
+.noto-w-600 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600; }
+.noto-w-700 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 700; }
+.noto-w-800 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 800; }
+.noto-w-900 { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 900; }
+
+/* Example variable-like class with a uniquifier (replace <uniquifier> with your label)
+   .noto-sans-bengali-strong { font-variation-settings: 'wght' 700; } */
+.noto-sans-bengali-strong {
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-optical-sizing: auto;
+}
