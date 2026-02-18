@@ -74,7 +74,16 @@ export async function GET(request, { params }) {
   const search = request.nextUrl?.search || '';
 
   // Only proxy GET for now
-  return proxyGet(path, search);
+  try {
+    return await proxyGet(path, search);
+  } catch (err) {
+    // Log full error for production debugging (check server logs)
+    // Keep response small but include message for immediate debugging
+    // Remove or harden this before long-term production use.
+    // eslint-disable-next-line no-console
+    console.error('[api/frontend] proxy error:', err);
+    const msg = (err && err.message) ? String(err.message) : 'unknown_error';
+    return new Response(JSON.stringify({ error: 'internal_server_error', message: msg }), { status: 500, headers: { 'content-type': 'application/json' } });
+  }
 }
 
-export const runtime = 'edge';

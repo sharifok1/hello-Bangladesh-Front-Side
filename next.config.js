@@ -30,7 +30,7 @@ const nextConfig = {
       pathname: '/api/image-proxy',
     },
   ],
-  formats: ['image/webp'],
+  formats: ['image/avif', 'image/webp'],
   deviceSizes: [640, 750, 828, 1080, 1200],
   imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   minimumCacheTTL: 60,
@@ -54,18 +54,14 @@ const nextConfig = {
   reactStrictMode: false,
   compress: true,
   poweredByHeader: false,
-  // Turbopack root helps Next infer the correct workspace root when multiple lockfiles exist
-  turbopack: {
-    root: './',
-  },
+  swcMinify: true,
 }
 
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  // Disable PWA during local development and when building on Netlify
-  disable: process.env.NODE_ENV === 'development' || process.env.NETLIFY === 'true',
+  disable: process.env.NODE_ENV === 'development',
 });
 
 module.exports = withPWA(nextConfig);
