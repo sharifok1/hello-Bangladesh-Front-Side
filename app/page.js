@@ -4,6 +4,7 @@ import Header from '@/components/Shared/Header/Header';
 import Image from "next/image";
 import { useState, useEffect} from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import api from '@/lib/api';
 import Footer from '@/components/Shared/Footer/Footer';
 import Voting from '@/components/OnlineVoting/OnlineVoting';
@@ -15,13 +16,30 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './page.css';
 import { FaPlayCircle } from "react-icons/fa";
-import BaPoCrime from '@/components/NeswSlider/BaPoCrime/BaPoCrime';
-import SpoBusTecAllc from '@/components/NeswSlider/SpoBusTecAllc/SpoBusTecAllc';
-import SciEngHelSuc from '@/components/NeswSlider/SciEngHelSuc/SciEngHelSuc';
-import EduEnvIntCor from '@/components/NeswSlider/EduEnvIntCor/EduEnvIntCor';
 import { getPostImage } from '@/lib/imageUtils';
 import { getPostUrl } from '@/lib/urlUtils';
 import SuspenseLoader from '@/components/Loading/SuspenseLoader';
+
+// Lazy load heavy slider components (below fold)
+const BaPoCrime = dynamic(() => import('@/components/NeswSlider/BaPoCrime/BaPoCrime'), {
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded"></div>,
+  ssr: false
+});
+
+const SpoBusTecAllc = dynamic(() => import('@/components/NeswSlider/SpoBusTecAllc/SpoBusTecAllc'), {
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded"></div>,
+  ssr: false
+});
+
+const SciEngHelSuc = dynamic(() => import('@/components/NeswSlider/SciEngHelSuc/SciEngHelSuc'), {
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded"></div>,
+  ssr: false
+});
+
+const EduEnvIntCor = dynamic(() => import('@/components/NeswSlider/EduEnvIntCor/EduEnvIntCor'), {
+  loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded"></div>,
+  ssr: false
+});
 
 export default function HomePage() {
   const [featuredPosts, setFeaturedPosts] = useState([]);
@@ -49,35 +67,38 @@ export default function HomePage() {
   // const fallback_imgage = "https://dev.hellobd.news/storage/media/hellobd-fallback-img_2026-01-29_03-25-04_3GUCqN4j.jpg";
 
   useEffect(() => {
-    api.get('/home')
-      .then(res => {
-        const postsData = res.data;  // all news
-        setFeaturedPosts(postsData?.featured); // features news
-        setTopPost(postsData?.top_post_news); // features news
-        setPopularPosts(postsData?.popular); // most popular news
-        setworldNews(postsData?.world_popular_news);  //world news
-        setMixnews(postsData?.mixed_popular_news); // passmisali
-        setSports(postsData?.sports_popular_news); // sports
-        setEntertainment(postsData?.entertainment_popular_news); // entertainment
-        setLiterature(postsData?.literature_popular_news); //literature
-        setOpinion(postsData?.opinion_popular_news); //opinion
-        setphotoFeature(postsData?.photo_feature_popular_news); //photoFeature
-        setLifestyle(postsData?.lifestyle_popular_news); //Life Style
-        setMultimedia(postsData?.multimedia_popular_news); // Multimedia   
+    // Combine API calls for better performance
+    Promise.all([
+      api.get('/home'),
+      api.get('/advertisements'),
+      api.get('/general-settings')
+    ])
+      .then(([homeRes, adsRes, settingsRes]) => {
+        // Home data
+        const postsData = homeRes.data;
+        setFeaturedPosts(postsData?.featured);
+        setTopPost(postsData?.top_post_news);
+        setPopularPosts(postsData?.popular);
+        setworldNews(postsData?.world_popular_news);
+        setMixnews(postsData?.mixed_popular_news);
+        setSports(postsData?.sports_popular_news);
+        setEntertainment(postsData?.entertainment_popular_news);
+        setLiterature(postsData?.literature_popular_news);
+        setOpinion(postsData?.opinion_popular_news);
+        setphotoFeature(postsData?.photo_feature_popular_news);
+        setLifestyle(postsData?.lifestyle_popular_news);
+        setMultimedia(postsData?.multimedia_popular_news);
         
+        // Advertisements
+        setBanner(adsRes.data?.data || []);
+        
+        // URL/Settings data
+        setUrlData(settingsRes.data);
       })
       .catch(err => {
         console.error('Error fetching data:', err);
-        const samplePosts = generateRealisticPosts();
-        // setPosts(samplePosts);
-        setFeaturedPosts(samplePosts.slice(0, 2));
-        setBreakingNews(samplePosts.slice(0, 3));
-        setPopularPosts(samplePosts.slice(0, 10));
-        // setCursor(20);
-        // setHasMore(true);
       })
       .finally(() => setLoading(false));
-
   }, []);
 
    // mobile screen
@@ -90,21 +111,6 @@ export default function HomePage() {
       window.addEventListener("resize", checkMobile);
       return () => window.removeEventListener("resize", checkMobile);
     }, []);
-
-
-  // ---------------------------banner-----------------------------------
-  useEffect(() => {
-  api.get('/advertisements')
-    .then(res => {
-      const ads = res.data?.data || [];
-      setBanner(ads);
-    })
-    .catch(err => {
-      console.error('Error fetching data:', err);
-    });
-}, []);
-  
-
 
 const getBanner = (page, placement) => {
   return banner?.find(
@@ -130,17 +136,7 @@ const homeSidebanner2 = getBanner('home', 'side_banner_two');
 
    //--------------------------close banner---------------------------------
 
-  //call urls data api from /general-settings
-  useEffect(() => {
-    api.get('/general-settings')
-      .then(res => {
-        setUrlData(res.data);
-      })
-      .catch(err => {
-        console.error('Error fetching URL data:', err);
-      });
-  }, []);
-
+  // Process video URL when urlData is available
   useEffect(() => {
   const videoUrl = urlData?.settings?.other_one;
   if (!videoUrl) return;
@@ -213,7 +209,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
                                       className="news-image object-cover object-center rounded-lg w-full h-full"
                                       src={imgsrc}
                                       alt={post?.title || "featured image"}
-                                      loading="eager"
+                                      priority
                                       fetchPriority="high"
                                       width={400}
                                       height={400}

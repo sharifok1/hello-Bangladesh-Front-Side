@@ -5,6 +5,8 @@ const notoSansBengali = Noto_Sans_Bengali({
   subsets: ['bengali'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 import PushNotificationButton from '../components/PushNotification/PushNotificationButton'
 import Script from 'next/script'
@@ -32,6 +34,10 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#2E3195" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.svg" />
         
+        {/* Performance: Preconnect to API domain */}
+        <link rel="preconnect" href="https://dev.hellobd.news" />
+        <link rel="dns-prefetch" href="https://dev.hellobd.news" />
+        
         {/* Organization Schema */}
         <script
           type="application/ld+json"
@@ -45,14 +51,14 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body suppressHydrationWarning>
-        {/* Google Analytics */}
+        {/* Google Analytics - Load with lower priority */}
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-XH6PWW5JT4"
         />
         <Script
           id="google-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

@@ -36,10 +36,20 @@ const nextConfig = {
   formats: ['image/avif', 'image/webp'],
   deviceSizes: [640, 750, 828, 1080, 1200],
   imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-  minimumCacheTTL: 60,
+  minimumCacheTTL: 3600, // Cache images for 1 hour
   unoptimized: false,
   dangerouslyAllowSVG: true,
+  // Increase timeout for slow-loading images
+  loader: 'default',
+  loaderFile: undefined,
 },
+
+  // Performance optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
+  },
 
   async rewrites() {
     return [
@@ -101,12 +111,6 @@ module.exports = withSentryConfig(module.exports, {
   tunnelRoute: "/monitoring",
 
   webpack: {
-    // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
-    // See the following for more information:
-    // https://docs.sentry.io/product/crons/
-    // https://vercel.com/docs/cron-jobs
-    automaticVercelMonitors: true,
-
     // Tree-shaking options for reducing bundle size
     treeshake: {
       // Automatically tree-shake Sentry logger statements to reduce bundle size
