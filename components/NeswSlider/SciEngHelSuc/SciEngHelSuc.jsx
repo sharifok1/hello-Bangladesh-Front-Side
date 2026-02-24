@@ -46,7 +46,7 @@ const [successStory, setsuccessStory] = useState([]);
                 </div>
                 {sciencenews?.slice(0,1).map((science, index) => (
                       <div key={index} className=" overflow-hidden border-b-2 h-auto">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                               const imgsrc = getPostImage(science);
                                 return imgsrc ? (
@@ -126,7 +126,7 @@ const [successStory, setsuccessStory] = useState([]);
 
                 {engineering?.slice(0,1).map((engineering_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                       <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                               const imgsrc = getPostImage(engineering_news);
                                 return imgsrc ? (
@@ -207,7 +207,7 @@ const [successStory, setsuccessStory] = useState([]);
 
                {health?.slice(0,1).map((health_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                       <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                               const imgsrc = getPostImage(health_news);
                                 return imgsrc ? (
@@ -288,7 +288,7 @@ const [successStory, setsuccessStory] = useState([]);
                 </div>
                 {successStory?.slice(0,1).map((successStory_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                       <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                               const imgsrc = getPostImage(successStory_news);
                                 return imgsrc ? (
@@ -389,7 +389,8 @@ const [successStory, setsuccessStory] = useState([]);
                                 <Image
                                 src={imgsrc}
                                 alt={science?.title}
-                                fill
+                                width={400}
+                                height={192}
                                 className="object-cover object-center w-full h-full rounded-md"
                                 />
                               ) : null;
@@ -409,9 +410,7 @@ const [successStory, setsuccessStory] = useState([]);
                     ))}
 
                     {sciencenews?.slice(1,3).map((science, index) => (
-                    <div key={index}
-                    className='mt-4'
-                     >
+                     <div key={index} className='mt-4' >
                       <div className="news-card">
                         <div className="news-image w-1/2 h-32">
                            {(() => {
@@ -421,8 +420,8 @@ const [successStory, setsuccessStory] = useState([]);
                                       className='object-cover object-center w-full h-full rounded-lg'
                                       src={imgsrc}
                                       alt="thumbnail"
-                                      width={300}
-                                      height={300}
+                                      width={200}
+                                      height={128}
                                     />
                                   ) : null;
                                 })()}
@@ -468,7 +467,8 @@ const [successStory, setsuccessStory] = useState([]);
                                 <Image
                                 src={imgsrc}
                                 alt={engineering_news?.title}
-                                fill
+                                width={400}
+                                height={192}
                                 className="object-cover object-center rounded-md"
                                 />
                               ) : null;
@@ -501,8 +501,8 @@ const [successStory, setsuccessStory] = useState([]);
                                className='object-cover object-center w-full h-full rounded-lg'
                                 src={imgsrc}
                                 alt="thumbnail"
-                                width={300}
-                                height={300}
+                                width={200}
+                                height={128}
                                 />
                               ) : null;
                           })()}
@@ -549,7 +549,8 @@ const [successStory, setsuccessStory] = useState([]);
                                 <Image
                                 src={imgsrc}
                                 alt={health_news?.title}
-                                fill
+                                width={400}
+                                height={192}
                                 className="object-cover object-center h-full w-full rounded-md"
                                 />
                               ) : null;
@@ -583,8 +584,8 @@ const [successStory, setsuccessStory] = useState([]);
                                 className='object-cover object-center w-full h-full rounded-lg'
                                 src={imgsrc}
                                 alt="thumbnail"
-                                width={300}
-                                height={300}
+                                width={200}
+                                height={128}
                                 />
                               ) : null;
                           })()}
@@ -628,7 +629,8 @@ const [successStory, setsuccessStory] = useState([]);
                                 <Image
                                 src={imgsrc}
                                 alt={successStory_news?.title}
-                                fill
+                                width={400}
+                                height={192}
                                 className="object-cover object-center w-full h-full rounded-md"
                                 />
                               ) : null;
@@ -661,8 +663,8 @@ const [successStory, setsuccessStory] = useState([]);
                                 className='object-cover object-center w-full h-full rounded-lg'
                                 src={imgsrc}
                                 alt="thumbnail"
-                                width={300}
-                                height={300}
+                                 width={200}
+                                height={128}
                                 />
                               ) : null;
                           })()}

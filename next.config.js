@@ -1,3 +1,6 @@
+// Suppress util._extend deprecation warning from legacy dependencies
+process.noDeprecation = true;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -54,14 +57,19 @@ const nextConfig = {
   reactStrictMode: false,
   compress: true,
   poweredByHeader: false,
-  swcMinify: true,
 }
 
-const withPWA = require('next-pwa')({
+const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  workboxOptions: {
+    disableDevLogs: true,
+  },
 });
 
 module.exports = withPWA(nextConfig);

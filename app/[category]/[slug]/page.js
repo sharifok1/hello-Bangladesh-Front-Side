@@ -16,6 +16,7 @@ import SideTrandingNews from '@/components/SideTrandingNews/SideTrandingNews';
 import OnlineVoting from '@/components/OnlineVoting/OnlineVoting';
 import { getPostImage } from '@/lib/imageUtils';
 import SuspenseLoader from '@/components/Loading/SuspenseLoader';
+import { generateArticleSchema, generateBreadcrumbSchema, generateMetaTitle, generateMetaDescription } from '@/lib/schemaUtils';
 
 export default function NewsPage() {
   const params = useParams();
@@ -55,6 +56,7 @@ export default function NewsPage() {
       fetchPost();
       fetchSidebarData();
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.slug]);
 
   useEffect(() => {
@@ -62,8 +64,9 @@ export default function NewsPage() {
     if (loading) return;
     if (!post) return;
 
-    const title = post.title ? `${post.title} - HelloBD` : 'HelloBD';
-    document.title = title;
+    // Generate optimized title (50-60 characters)
+    const optimizedTitle = generateMetaTitle(post.title);
+    document.title = optimizedTitle;
 
     const setMeta = (name, value, prop = false) => {
       if (!value) return;
@@ -85,16 +88,28 @@ export default function NewsPage() {
       }
     }
 
-    setMeta('description', post.excerpt || (post.content ? String(post.content).slice(0, 160) : ''));
-    setMeta('og:title', post.title, true);
-    setMeta('og:description', post.excerpt || '', true);
+    // Generate optimized description (120-160 characters)
+    const optimizedDescription = generateMetaDescription(post.excerpt, post.content, post.title);
+
+    setMeta('description', optimizedDescription);
+    setMeta('og:title', optimizedTitle, true);
+    setMeta('og:description', optimizedDescription, true);
     setMeta('og:type', 'article', true);
     setMeta('og:url', window.location.href, true);
     if (imageUrl) setMeta('og:image', imageUrl, true);
     setMeta('twitter:card', 'summary_large_image');
-    setMeta('twitter:title', post.title);
-    setMeta('twitter:description', post.excerpt || '');
+    setMeta('twitter:title', optimizedTitle);
+    setMeta('twitter:description', optimizedDescription);
     if (imageUrl) setMeta('twitter:image', imageUrl);
+
+    // Add canonical link
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', window.location.href.split('?')[0].split('#')[0]);
   }, [loading, post]);
 
   useEffect(() => {
@@ -105,6 +120,7 @@ export default function NewsPage() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadingFeed, hasMoreFeed]);
 
   const fetchPost = async () => {
@@ -269,8 +285,32 @@ useEffect(() => {
     );
   }
 
+  // Generate schemas for SEO
+  const articleSchema = generateArticleSchema(post);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'হোম', url: '/' },
+    { name: post?.categories?.[0]?.name_bn || post?.categories?.[0]?.name || 'সংবাদ', url: `/category/${post?.categories?.[0]?.slug}` },
+    { name: post.title, url: `/${post?.categories?.[0]?.slug || 'news'}/${post.slug}` }
+  ]);
+
   return (
     <Layout sidebar={false}>
+    {/* Article Schema */}
+    {articleSchema && (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+    )}
+    
+    {/* Breadcrumb Schema */}
+    {breadcrumbSchema && (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+    )}
+    
     <section className='container mx-auto'>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="lg:col-span-3">
@@ -325,11 +365,12 @@ useEffect(() => {
               </div>
               
               <div className="flex items-center gap-2">
+                <span className="text-gray-600 text-lg">শেয়ার করুন:</span>
                 <button onClick={shareOnFacebook} className="text-blue-600 hover:opacity-80"><FaFacebookF/></button>
                 <button onClick={shareOnTwitter} className="text-dark-500 hover:opacity-80"><FaXTwitter/></button>
                 <button onClick={copyLink} className="text-gray-600 hover:opacity-80"><FaRegCopy/></button>
-                <button onClick={() => zoomText(1)} className="text-blue-600 hover:opacity-80 bg-blue-100 px-2 py-1 text-xs  w-8 h-8 rounded-full">Aa+</button>
-                <button onClick={() => zoomText(-1)} className="text-blue-600 hover:opacity-80 bg-blue-100 px-2 py-1 rounded-full text-xs  w-8 h-8 rounded-full">Aa-</button>
+                <button onClick={() => zoomText(1)} className="text-dark-600 hover:opacity-80 bg-blue-100 px-2 py-1 text-xs w-8 h-8 rounded-full text-center font-semibold">Aa+</button>
+                <button onClick={() => zoomText(-1)} className="text-dark-600 hover:opacity-80 bg-blue-100 px-2 py-1 text-xs w-8 h-8 rounded-full text-center font-semibold">Aa-</button>
               </div>
             </div>
 

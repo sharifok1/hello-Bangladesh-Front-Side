@@ -48,7 +48,7 @@ const EduEnvIntCor = () => {
                 </div>
                 {education?.slice(0,1).map((educationNews, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                            {(() => {
                                const imgsrc = getPostImage(educationNews);
                                  return imgsrc ? (
@@ -123,7 +123,7 @@ const EduEnvIntCor = () => {
                 </div>
                 {environment?.slice(0,1).map((environment_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                            {(() => {
                                const imgsrc = getPostImage(environment_news);
                                  return imgsrc ? (
@@ -198,7 +198,7 @@ const EduEnvIntCor = () => {
                 </div>
                {interview?.slice(0,1).map((interview_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                            {(() => {
                                const imgsrc = getPostImage(interview_news);
                                  return imgsrc ? (
@@ -274,7 +274,7 @@ const EduEnvIntCor = () => {
 
                 {corporateNews?.slice(0,1).map((corporate, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                                const imgsrc = getPostImage(corporate);
                                  return imgsrc ? (
@@ -369,7 +369,9 @@ const EduEnvIntCor = () => {
                                  <Image
                                   src={imgsrc}
                                   alt={educationNews?.title}
-                                  fill
+                                   width={400}
+                                   height={192}
+                                  // fill
                                   className="object-cover object-center w-full h-full rounded-md"
                                  />
                                ) : null;
@@ -403,8 +405,8 @@ const EduEnvIntCor = () => {
                                   className='object-cover object-center w-full h-full rounded-md'
                                   src={imgsrc}
                                   alt="thumbnail"
-                                  width={300}
-                                  height={300}
+                                  width={200}
+                                height={128}
                                  />
                                ) : null;
                              })()}
@@ -447,7 +449,8 @@ const EduEnvIntCor = () => {
                                  <Image
                                   src={imgsrc}
                                   alt={environment_news?.title}
-                                  fill
+                                  width={400}
+                                  height={192}
                                   className="object-cover object-center w-full h-full rounded-md"
                                  />
                                ) : null;
@@ -480,8 +483,8 @@ const EduEnvIntCor = () => {
                                   className='object-cover object-center w-full h-full rounded-lg'
                                   src={imgsrc}
                                   alt="thumbnail"
-                                  width={300}
-                                  height={300}
+                                   width={200}
+                                height={128}
                                  />
                                ) : null;
                              })()}
@@ -525,7 +528,8 @@ const EduEnvIntCor = () => {
                                  <Image
                                   src={imgsrc}
                                   alt={interview_news?.title}
-                                  fill
+                                  width={400}
+                                  height={192}
                                   className="object-cover object-center w-full h-full rounded-md"
                                  />
                                ) : null;
@@ -559,8 +563,8 @@ const EduEnvIntCor = () => {
                                   className='object-cover object-center w-full h-full rounded-lg'
                                   src={imgsrc}
                                   alt="thumbnail"
-                                  width={300}
-                                  height={300}
+                                  width={200}
+                                height={128}
                                  />
                                ) : null;
                              })()}
@@ -606,7 +610,8 @@ const EduEnvIntCor = () => {
                                  <Image
                                   src={imgsrc}
                                   alt={corporate?.title}
-                                  fill
+                                  width={400}
+                                  height={192}
                                   className="object-cover object-center w-full h-full rounded-md"
                                  />
                                ) : null;
@@ -639,8 +644,8 @@ const EduEnvIntCor = () => {
                                   className='object-cover object-center w-full h-full rounded-lg'
                                   src={imgsrc}
                                   alt="thumbnail"
-                                  width={300}
-                                  height={300}
+                                  width={200}
+                                  height={128}
                                  />
                                ) : null;
                              })()}

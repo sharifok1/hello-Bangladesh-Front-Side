@@ -6,7 +6,7 @@
  import './Footer.css';
  import axios from 'axios';
  import api from '@/lib/api';
- import { FaFacebookF, FaXTwitter, FaYoutube , FaRegCopy  } from "react-icons/fa6"; 
+ import { FaFacebookF, FaXTwitter, FaYoutube , FaRegCopy, FaInstagram  } from "react-icons/fa6"; 
 import Link from 'next/link';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 import Image from 'next/image';
@@ -80,29 +80,38 @@ import Image from 'next/image';
           <div className="flex items-center gap-2 pt-4">
             {/* Facebook */}
             <Link
-              href={outerLinks?.facebook || "#"}
+              href={outerLinks?.facebook || "https://www.facebook.com/hellobangladesh.portal"}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
               className="p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
             >
               <FaFacebookF size={14} />
             </Link>
 
+            {/* YouTube */}
             <Link
-              href={outerLinks?.youtube || "#"}
+              href={outerLinks?.youtube || "https://www.youtube.com/@HelloBangladesh.portal"}
               target="_blank"
-              className="p-2 rounded-full bg-red-600 text-white hover:bg-blue-700 transition"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="p-2 rounded-full bg-red-600 text-white hover:bg-red-700 transition"
             >
               <FaYoutube size={14} />
             </Link>
 
-            {/* Twitter / X */}
-            <Link
-              href={outerLinks?.twitter || "#"}
-              target="_blank"
-              className="p-2 rounded-full bg-black text-white hover:bg-gray-800 transition"
-            >
-              <FaXTwitter size={14} />
-            </Link>
+            {/* Twitter Field to instagram / X - Only show if API provides the link */}
+            {outerLinks?.twitter && (
+              <Link
+                href={outerLinks.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                className="p-2 rounded-full bg-rose-500 text-white hover:bg-rose-700 transition"
+              >
+                <FaInstagram size={14} />
+              </Link>
+            )}
           </div>
 
 
@@ -120,7 +129,7 @@ import Image from 'next/image';
 
             <div className="md:col-span-1">
               <div className='sm:hidden md:block'>
-                <Image className='hidden md:block' src={footerImge} alt="Footer Logo" loading="lazy" width={150} height={150} />
+                <Image className='hidden md:block w-64' src={footerImge} alt="Footer Logo" loading="lazy" width={200} height={150} />
               </div>
              <div className='pt-12'>
                <p className="mb-4" style={{color: '#d1d5db'}}>

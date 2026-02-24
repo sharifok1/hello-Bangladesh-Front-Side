@@ -15,6 +15,7 @@ import { getPostImage } from '@/lib/imageUtils';
 import Header from '@/components/Shared/Header/Header';
 import Footer from '@/components/Shared/Footer/Footer';
 import SuspenseLoader from '@/components/Loading/SuspenseLoader';
+import { generatePersonSchema } from '@/lib/schemaUtils';
 
 export default function ReporterPage() {
   const params = useParams();
@@ -168,8 +169,19 @@ export default function ReporterPage() {
     );
   }
 
+  // Generate Person schema
+  const personSchema = generatePersonSchema(reporter);
+
   return (
     <Layout sidebar={false}>
+      {/* Person Schema */}
+      {personSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      )}
+      
       <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <div className=" items-start gap-6">
             

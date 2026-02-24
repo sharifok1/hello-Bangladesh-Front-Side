@@ -11,6 +11,7 @@ import Image from "next/image";
 import formatTimeAgo from '@/components/FormateTimeAgo/FormateTimeAgo';
 import { getPostImage } from '@/lib/imageUtils';
 import { getPostUrl } from '@/lib/urlUtils';
+import { generateMetaTitle, generateMetaDescription } from '@/lib/schemaUtils';
 
 export default function CategoryPage() {
   const params = useParams();
@@ -29,22 +30,37 @@ export default function CategoryPage() {
     if (params.slug) {
       fetchCategory();
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.slug]);
 
   // Update document title and description on client navigation
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (loading) return;
-    const title = category?.name_bn || category?.name || (params.slug || 'Category');
-    document.title = `${title} - HelloBD`;
-    const desc = category?.description || `সর্বশেষ ${title} সংবাদ সমূহ`;
+    
+    const categoryName = category?.name_bn || category?.name || (params.slug || 'Category');
+    const optimizedTitle = generateMetaTitle(`${categoryName} - সর্বশেষ সংবাদ`);
+    document.title = optimizedTitle;
+    
+    const desc = category?.description || `সর্বশেষ ${categoryName} সংবাদ সমূহ`;
+    const optimizedDescription = generateMetaDescription(desc, `${categoryName} বিভাগের সকল খবর এবং আপডেট পড়ুন HelloBD News এ`, categoryName);
+    
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) {
       meta = document.createElement('meta');
       meta.setAttribute('name', 'description');
       document.head.appendChild(meta);
     }
-    meta.setAttribute('content', desc);
+    meta.setAttribute('content', optimizedDescription);
+
+    // Add canonical link
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', window.location.href.split('?')[0].split('#')[0]);
   }, [loading, category, params.slug]);
 
   useEffect(() => {
@@ -55,6 +71,7 @@ export default function CategoryPage() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasMore, loadingMore]);
 
   const fetchCategory = async () => {
@@ -181,7 +198,7 @@ export default function CategoryPage() {
       {/* ---------------------------------section header//------------------------ */}
       <div className="mb-8 px-4">
         <h1 className="text-3xl font-bold mb-4" style={{color: category?.color || '#3A2ABB'}}>
-          {category?.name_bn || category?.name || params.slug}
+          {category?.name_bn || category?.name }
         </h1>
         
         {/* Reporter Info & Social Share */}
@@ -191,8 +208,6 @@ export default function CategoryPage() {
             <FaRegClock className="text-gray-500" size={14} />
             <span className='text-lg'>{new Date().toLocaleTimeString("bn-BD")}</span>
           </div>
-
-         
         </div>
       </div>
 

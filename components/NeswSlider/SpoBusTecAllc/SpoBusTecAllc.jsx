@@ -50,15 +50,17 @@ const SpoBusTecAllc = () => {
                 </div>
                 {sports?.slice(0,1).map((sports_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                               const imgsrc = getPostImage(sports_news);
                                 return imgsrc ? (
                                 <Image
+                                  className="object-cover w-full h-full"
                                   src={imgsrc}
                                   alt={sports_news?.title}
                                   fill
-                                  className="object-cover object-center w-full h-full rounded-md"
+                                  sizes="(max-width: 768px) 100vw, 400px"
+                                  quality={80}
                                 />
                               ) : null;
                           })()}
@@ -129,15 +131,17 @@ const SpoBusTecAllc = () => {
 
                 {economy?.slice(0,1).map((economy_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                               const imgsrc = getPostImage(economy_news);
                                 return imgsrc ? (
                                 <Image
-                                src={imgsrc}
-                                alt={economy_news?.title}
-                                fill
-                                className="object-cover object-center rounded-md"
+                                  className="object-cover w-full h-full"
+                                  src={imgsrc}
+                                  alt={economy_news?.title}
+                                  fill
+                                  sizes="(max-width: 768px) 100vw, 400px"
+                                  quality={80}
                                 />
                               ) : null;
                           })()}
@@ -208,15 +212,17 @@ const SpoBusTecAllc = () => {
  
                 {technews?.slice(0,1).map((tech_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                               const imgsrc = getPostImage(tech_news);
                                 return imgsrc ? (
                                 <Image
-                                src={imgsrc}
-                                alt={tech_news?.title}
-                                fill
-                                className="object-cover object-center rounded-md"
+                                  className="object-cover w-full h-full"
+                                  src={imgsrc}
+                                  alt={tech_news?.title}
+                                  fill
+                                  sizes="(max-width: 768px) 100vw, 400px"
+                                  quality={80}
                                 />
                               ) : null;
                           })()}
@@ -286,15 +292,17 @@ const SpoBusTecAllc = () => {
 
                 {countrynews?.slice(0,1).map((country, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-lg">
                           {(() => {
                               const imgsrc = getPostImage(country);
                                 return imgsrc ? (
                                 <Image
-                                src={imgsrc}
-                                alt={country?.title}
-                                fill
-                                className="object-cover object-center w-full h-full rounded-md"
+                                  className="object-cover w-full h-full"
+                                  src={imgsrc}
+                                  alt={country?.title}
+                                  fill
+                                  sizes="(max-width: 768px) 100vw, 400px"
+                                  quality={80}
                                 />
                               ) : null;
                           })()}
@@ -362,7 +370,8 @@ const SpoBusTecAllc = () => {
             type: 'progressbar',
             }}
             navigation={true}
-            modules={[Pagination, Navigation]}
+            autoPlay = {true}
+            modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper"
         >
             {/* খেলা- */}

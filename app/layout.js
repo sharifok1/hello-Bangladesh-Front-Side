@@ -8,15 +8,22 @@ const notoSansBengali = Noto_Sans_Bengali({
 });
 import PushNotificationButton from '../components/PushNotification/PushNotificationButton'
 import Script from 'next/script'
+import { generateOrganizationSchema, generateWebsiteSchema } from '@/lib/schemaUtils'
 
 
 
 export const metadata = {
-  title: 'HelloBD News',
-  description: 'বাংলাদেশের প্রধান সংবাদ পোর্টাল',
+  title: 'HelloBD News - বাংলাদেশের সর্বশেষ সংবাদ ও আপডেট',
+  description: 'HelloBD News বাংলাদেশের প্রধান অনলাইন সংবাদ পোর্টাল। সর্বশেষ জাতীয়, আন্তর্জাতিক, রাজনীতি, খেলাধুলা, বিনোদন এবং আরও অনেক বিষয়ের খবর পড়ুন।',
+  alternates: {
+    canonical: 'https://hellobd.news',
+  },
 }
 
 export default function RootLayout({ children }) {
+  const organizationSchema = generateOrganizationSchema();
+  const websiteSchema = generateWebsiteSchema();
+
   return (
     <html lang="bn" className={notoSansBengali.className} suppressHydrationWarning>
       <head>
@@ -24,24 +31,39 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2E3195" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.svg" />
+        
+        {/* Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        
+        {/* Website Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
       </head>
       <body suppressHydrationWarning>
         {/* Google Analytics */}
         <Script
-          strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=G-Q69RR7NNXH"
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-XH6PWW5JT4"
         />
         <Script
           id="google-analytics"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-Q69RR7NNXH', {
+              gtag('config', 'G-XH6PWW5JT4', {
                 page_path: window.location.pathname,
-                send_page_view: true
+                send_page_view: true,
+                cookie_flags: 'SameSite=None;Secure',
+                allow_google_signals: true,
+                allow_ad_personalization_signals: true
               });
             `,
           }}

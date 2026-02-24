@@ -2,7 +2,7 @@
 
 import Header from '@/components/Shared/Header/Header';
 import Image from "next/image";
-import { useState, useEffect, useRef} from 'react';
+import { useState, useEffect} from 'react';
 import Link from 'next/link';
 import api from '@/lib/api';
 import Footer from '@/components/Shared/Footer/Footer';
@@ -191,6 +191,9 @@ const wordExcerpt = (text, wordLimit = 20) => {
       <Header />
       {/* ------------------------header//--------------------- */}
 
+      {/* SEO H1 - Hidden but present for search engines */}
+      <h1 className="sr-only">HelloBD News - বাংলাদেশের সর্বশেষ সংবাদ ও আপডেট</h1>
+
       {/* -------------------------------------------hero section section 1--------------------------------------*/}
       <div className="container mx-auto px-4 pb-1 font-noto pt-4">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 border-b border-gray-300">
@@ -225,7 +228,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
                                 </div>
 
                                 <Link href={getPostUrl(post)} className="block hover:opacity-80">
-                                    <h3 className="text-xl md:text-2xl font-semibold font-noto text-white">
+                                    <h3 className="text-lg md:text-2xl font-semibold font-noto text-white">
                                     {post?.title}
                                     </h3>
                                 </Link>
@@ -432,7 +435,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
                 priority
                 >
               </Image>
-              <h4 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal font-noto">বহুল আলোচিত</h4>
+              <h2 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal font-noto">বহুল আলোচিত</h2>
              </div>
               
               {/* news slider// */}
@@ -528,7 +531,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
             {/* বিশ্ব খবর Section - 3 columns */}
             <section className="mb-8">
               <div className="flex justify-between items-center border-b py-2 px-2 mb-4 bg-sky-400">
-                  <h3 className="text-xl font-normal text-white border-l-2 pl-2 pt-1 font-noto ">বিশ্ব</h3>
+                  <h2 className="text-xl font-normal text-white border-l-2 pl-2 pt-1 font-noto ">বিশ্ব</h2>
                   <Link href="/category/international" className="text-xl font-normal font-noto text-white hover:text-red-600 transition-colors duration-200 flex items-center">
                     সব খবর
                     <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -752,7 +755,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
                 >
               </Image>
               <Link href={`/category/${entertainment?.[0]?.categories?.[0]?.slug}`} passHref>
-              <h4 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal">বিনোদন</h4>
+              <h2 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal">বিনোদন</h2>
               </Link>
              </div>
                   <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4'>
@@ -849,7 +852,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
               </Image>
               
                <Link href={`/category/${lifestyle?.[0]?.categories?.[1]?.slug}`} passHref>
-                  <h4 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal">লাইফস্টাইল</h4>
+                  <h2 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal">লাইফস্টাইল</h2>
               </Link>
 
              </div>
@@ -1122,7 +1125,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
                 >
               </Image>
                <Link href={`/category/${sports?.[0]?.categories?.[0]?.slug}`} passHref>
-                    <h4 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal">স্পোর্টস</h4>
+                    <h2 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal">স্পোর্টস</h2>
               </Link>
 
              </div>
@@ -1208,7 +1211,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
                 >
               </Image>
               <Link href={`/category/${photoFeature?.[0]?.categories?.[0]?.slug}`} passHref>
-                  <h4 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal">ফটোফিচার</h4>
+                  <h2 className="text-xl font-bold mb-2 mx-auto pt-3 text-white font-normal">ফটোফিচার</h2>
               </Link>
              </div>
               
@@ -1287,7 +1290,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
       <section>
        <div className="container mx-auto px-4 my-8">
         <div className="flex justify-between items-center border-b py-2 px-2 mb-4 bg-cyan-600">
-            <h3 className="text-xl font-bold text-white border-l-2 pl-2 pt-1 ">মতামত</h3>
+            <h2 className="text-xl font-bold text-white border-l-2 pl-2 pt-1 ">মতামত</h2>
             <Link href="/category/international" className="font-semibold text-white hover:text-red-600 transition-colors duration-200 flex items-center">
               সব খবর
               <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1368,7 +1371,7 @@ const wordExcerpt = (text, wordLimit = 20) => {
                 >
               </Image>
 
-              <h4 className="text-xl font-bold mb-2 mx-auto pt-3 text-black font-normal">শিল্প ও সাহিত্য</h4>
+              <h2 className="text-xl font-bold mb-2 mx-auto pt-3 text-black font-normal">শিল্প ও সাহিত্য</h2>
              </div>
                   <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 py-2'>
                     {literature?.slice(0,3).map((literatureNews, index) => (
@@ -1377,16 +1380,16 @@ const wordExcerpt = (text, wordLimit = 20) => {
                       >
                         <div className=" rounded relative">
                           {/* Image */}
-                          <div className="news-image w-full">
+                          <div className="h-64 news-image w-full">
                             {(() => {
                               const imgsrc = getPostImage(literatureNews);
                                 return imgsrc ? (
                                 <Image
-                                    className='w-full'
+                                    className='w-full h-full object-cover'
                                     src={imgsrc}
-                                    alt="thumbnail"
-                                    width={400}
-                                    height={400}
+                                    alt={literatureNews?.title || "শিল্প ও সাহিত্য"}
+                                    width={300}
+                                    height={256}
                                 />
                               ) : null;
                             })()}
