@@ -224,9 +224,9 @@ const wordExcerpt = (text, wordLimit = 20) => {
                                 </div>
 
                                 <Link href={getPostUrl(post)} className="block hover:opacity-80">
-                                    <h3 className="text-lg md:text-2xl font-semibold font-noto text-white">
+                                    <h1 className="text-lg md:text-2xl font-semibold font-noto text-white">
                                     {post?.title}
-                                    </h3>
+                                    </h1>
                                 </Link>
 
                                 <div className="text-sm font-medium" style={{color: '#ffffff'}}>
