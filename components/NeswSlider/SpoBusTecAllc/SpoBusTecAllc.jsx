@@ -8,28 +8,7 @@ import Image from 'next/image';
 import { getPostImage } from '@/lib/imageUtils';
 import { getPostUrl } from '@/lib/urlUtils';
 
-const SpoBusTecAllc = () => {
-    // const [bangladeshNews, setBangladeshNews] = useState([]);
-    // const [politics, setPolitics] = useState([]);
-    // const [crime, setCrime] = useState([]);
-    const [economy, setEconomy] = useState([]);
-    const [sports, setSports] = useState([]);
-    const [technews, setTechnews] = useState([]);
-    const [countrynews, setCountrynews] = useState([]);
-
-     useEffect(() => {
-        api.get('/home')
-          .then(res => {
-            const postsData = res.data;  // all news
-            setEconomy(postsData?.economy_popular_news); // economic - business
-            setSports(postsData?.sports_popular_news); // sports
-            setTechnews(postsData?.technology_popular_news); // Technology
-            setCountrynews(postsData?.country_popular_news); // All bangladesh news
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          })
-      }, []);
+const SpoBusTecAllc = ({ sports, economy, technews, countrynews }) => {
     return (
      <>
 

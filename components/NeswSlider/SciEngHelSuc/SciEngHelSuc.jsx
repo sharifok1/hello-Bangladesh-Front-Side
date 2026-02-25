@@ -8,25 +8,7 @@ import Image from 'next/image';
 import { getPostImage } from '@/lib/imageUtils';
 import { getPostUrl } from '@/lib/urlUtils';
 
-const SciEngHelSuc = () => {
-const [sciencenews, setSciencenews] = useState([]);
-const [engineering, setEngineering] = useState([]);
-const [health, setHealth] = useState([]);
-const [successStory, setsuccessStory] = useState([]);
-
-     useEffect(() => {
-        api.get('/home')
-          .then(res => {
-            const postsData = res.data;  // all news
-            setSciencenews(postsData?.science_popular_news); // Science
-            setEngineering(postsData?.engineering_popular_news); //engineering
-            setHealth(postsData?.health_popular_news); // health
-            setsuccessStory(postsData?.success_storys_popular_news); //successStory 
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          })
-      }, []);
+const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
     return (
      <>
         {/* ------section 8-----------বিজ্ঞান------------স্থাপত্য ও প্রকৌশল----------স্বাস্থ্য---------সফল মুখ---------------*/}

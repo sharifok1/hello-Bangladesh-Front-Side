@@ -8,23 +8,7 @@ import Image from 'next/image';
 import { getPostImage } from '@/lib/imageUtils';
 import { getPostUrl } from '@/lib/urlUtils';
 
-const BaPoCrime = () => {
-    const [bangladeshNews, setBangladeshNews] = useState([]);
-      const [politics, setPolitics] = useState([]);
-      const [crime, setCrime] = useState([]);
-
-     useEffect(() => {
-        api.get('/home')
-          .then(res => {
-            const postsData = res.data;
-                    setBangladeshNews(postsData?.bangladeshi_popular_news);
-                    setPolitics(postsData?.politics_popular_news);
-                    setCrime(postsData?.crime_popular_news);
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          })
-      }, []);
+const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
     return (
      <>
 
@@ -60,7 +44,7 @@ const BaPoCrime = () => {
                               />
                             ) : null}
                           </div>                        
-                          <div className="py-1">
+                          <div className="py-1 min-h-24">
                             <Link href={getPostUrl(bd_news)} className="block hover:opacity-80">
                               <h3 className="text-lg mb-2 line-clamp-2 font-noto text-stone-800">
                                 {bd_news?.title}
@@ -136,7 +120,7 @@ const BaPoCrime = () => {
                             ) : null}
                           </div>
                             
-                          <div className="py-1">
+                          <div className="py-1 min-h-24">
                             <Link href={getPostUrl(politics_news)} className="block hover:opacity-80">
                               <h3 className="text-lg mb-2 line-clamp-2 font-noto text-stone-800">
                                 {politics_news?.title}
@@ -215,7 +199,7 @@ const BaPoCrime = () => {
                             ) : null}
                           </div>
                            
-                          <div className="py-1">
+                          <div className="py-1 min-h-24">
                             <Link href={getPostUrl(crime_news)} className="block hover:opacity-80">
                               <h3 className="text-lg mb-2 line-clamp-2 font-noto text-stone-800">
                                 {crime_news?.title}
@@ -300,7 +284,7 @@ const BaPoCrime = () => {
                               />
                             ) : null}
                           </div>                        
-                          <div className="py-1">
+                           <div className="py-1 min-h-24">
                             <Link href={getPostUrl(bd_news)} className="block hover:opacity-80">
                               <h3 className="text-lg mb-2 line-clamp-2 font-noto text-stone-800">
                                 {bd_news?.title}
@@ -376,7 +360,7 @@ const BaPoCrime = () => {
                             ) : null}
                           </div>
                             
-                          <div className="py-1">
+                          <div className="py-1 min-h-24">
                             <Link href={getPostUrl(politics_news)} className="block hover:opacity-80">
                               <h3 className="text-lg mb-2 line-clamp-2 font-noto text-stone-800">
                                 {politics_news?.title}
@@ -437,64 +421,66 @@ const BaPoCrime = () => {
                     </Link>
                   </div>
 
-                  {crime?.slice(0,1).map((crime_news, index) => {
-                    const mainImageSrc = getPostImage(crime_news);
-                    return (
-                        <div key={index}  className=" overflow-hidden border-b-2 h-auto">
-                          <div className="w-full h-48 relative">
-                            {mainImageSrc ? (
-                              <Image
-                                src={mainImageSrc}
-                                alt={crime_news?.title}
-                                width={400}
-                                height={192}
-                                className="object-cover object-center w-full h-full rounded-md"
-                              />
-                            ) : null}
-                          </div>
-                           
-                          <div className="py-1">
-                            <Link href={getPostUrl(crime_news)} className="block hover:opacity-80">
-                              <h3 className="text-lg mb-2 line-clamp-2 font-noto text-stone-800">
-                                {crime_news?.title}
-                              </h3>
-                            </Link>
-                              <p className="text-sm font-noto text-stone-500">
-                                    {FormatTimeAgo(crime_news?.created_at)}
-                              </p>         
-                          </div>
+                  {crime?.slice(0,1).map((crime_news, index) => (
+                      <div key={index} className=" overflow-hidden border-b-2">
+                        <div className="w-full h-48 relative">
+                          {(() => {
+                               const imgsrc = getPostImage(crime_news);
+                                 return imgsrc ? (
+                                 <Image
+                                  src={imgsrc}
+                                  alt={crime_news?.title}
+                                   width={400}
+                                   height={192}
+                                  // fill
+                                  className="object-cover object-center w-full h-full rounded-md"
+                                 />
+                               ) : null;
+                             })()}
                         </div>
-                    );
-                  })}
+                        <div className="py-1 min-h-24">
+                          <Link href={getPostUrl(crime_news)} className="block hover:opacity-80">
+                            <h3 className="text-lg mb-2 line-clamp-2 font-noto text-stone-800">
+                              {crime_news?.title}
+                            </h3>
+                          </Link>
+                            <p className="text-sm font-noto text-stone-500">
+                                  {FormatTimeAgo(crime_news?.created_at)}
+                            </p>
+                        </div>
+                      </div>
+                    ))}
 
                  {crime?.slice(1,3).map((crime_news, index) => (
-                     <div key={index} className='mt-4' >
+                    <div 
+                    className='mt-4'
+                    key={index} >
                       <div className="news-card">
+                        {/* Image */}
                         <div className="news-image w-1/2 h-32">
-                           {(() => {
-                                  const imgsrc = getPostImage(crime_news);
-                                    return imgsrc ? (
-                                    <Image
-                                      className='object-cover object-center w-full h-full rounded-lg'
-                                      src={imgsrc}
-                                      alt="thumbnail"
-                                      width={200}
-                                      height={128}
-                                    />
-                                  ) : null;
-                                })()}
-                            </div>
-                       
+                          {(() => {
+                               const imgsrc = getPostImage(crime_news);
+                                 return imgsrc ? (
+                                 <Image
+                                  className='object-cover object-center w-full h-full rounded-md'
+                                  src={imgsrc}
+                                  alt="thumbnail"
+                                  width={200}
+                                height={128}
+                                 />
+                               ) : null;
+                             })()}
+                        </div>
                         {/* Content */}
                         <div className="news-content w-1/2">
                          <Link href={getPostUrl(crime_news)} passHref>
-                              <h3 className=" text-lg mb-2 line-clamp-2 font-noto text-stone-800">
+                              <h3 className="text-lg mb-2 line-clamp-2 font-noto text-stone-800">
                                 {crime_news?.title?.length > 60
                                   ? crime_news?.title.slice(0, 60) + '...'
                                   : crime_news?.title}
                               </h3>
                             </Link>
-                          <p className="text-sm font-noto text-stone-500">
+                          <p className=" text-sm font-noto text-stone-500">
                             {FormatTimeAgo(crime_news?.created_at)}
                           </p>
                         </div>

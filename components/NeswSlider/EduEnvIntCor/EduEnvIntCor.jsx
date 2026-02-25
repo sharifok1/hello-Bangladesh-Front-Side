@@ -9,25 +9,7 @@ import GlobalNewsDate from '@/components/GlobalNewsDate/GlobalNewsDate';
 import { getPostImage } from '@/lib/imageUtils';
 import { getPostUrl } from '@/lib/urlUtils';
 
-const EduEnvIntCor = () => {
-    const [education, setEducation] = useState([""]);
-    const [environment, setEnvironment] = useState([""]);
-    const [interview, setInterview] = useState([""]);
-    const [corporateNews, setCorporateNews] = useState([""]);
-
-     useEffect(() => {
-        api.get('/home')
-          .then(res => {
-            const postsData = res.data;  // all news
-            setEducation(postsData?.education_popular_news); //education
-            setEnvironment(postsData?.environment_popular_news); //environment
-            setInterview(postsData?.interview_popular_news); //interview
-            setCorporateNews(postsData?.corporate_popular_news); //corporateNews
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          })
-      }, []);
+const EduEnvIntCor = ({ education, environment, interview, corporateNews }) => {
     return (
      <>
       {/* ----শিক্ষা------------পরিবেশ---------মুখোমুখি---------করপোরেট সংবাদ---------*/}
