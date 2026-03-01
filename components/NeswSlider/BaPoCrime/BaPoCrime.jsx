@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FormatTimeAgo } from '@/components/FormateTimeAgo/FormateTimeAgo';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 import Link from 'next/link';
-import api from '@/lib/api';
+// import api from '@/lib/api';
 import Image from 'next/image';
 import { getPostImage } from '@/lib/imageUtils';
 import { getPostUrl } from '@/lib/urlUtils';
@@ -35,11 +35,11 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                           <div className="w-full h-48 relative overflow-hidden rounded-lg">
                             {mainImageSrc ? (
                               <Image
-                                className="object-cover w-full h-full"
+                                className="object-cover "
                                 src={mainImageSrc}
                                 alt={bd_news?.title}
                                 fill
-                                sizes="(max-width: 768px) 100vw, 400px"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 quality={80}
                               />
                             ) : null}
@@ -112,9 +112,9 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                               <Image
                                 src={mainImageSrc}
                                 alt={politics_news?.title}
+                                className="object-cover "
                                 fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, 400px"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 quality={80}
                               />
                             ) : null}
@@ -145,8 +145,8 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                                 className='object-cover'
                                 src={thumbnailSrc}
                                 alt="thumbnail"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 fill
-                                sizes="200px"
                                 quality={75}
                               />
                             ) : null}
@@ -191,9 +191,9 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                               <Image
                                 src={mainImageSrc}
                                 alt={crime_news?.title}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, 400px"
+                                className="object-cover "
                                 quality={80}
                               />
                             ) : null}
@@ -249,7 +249,8 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
               </div>  
             </section>
 
-        {/* For mobile version */}
+        {/* --------------------------For mobile version--------------------------------- */}
+
         <div className='block md:hidden mobile-swiper'>
             <Swiper
             pagination={{
@@ -273,14 +274,14 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                       const mainImageSrc = getPostImage(bd_news);
                       return (
                         <div key={index}  className=" overflow-hidden border-b-2 h-auto">
-                         <div className="w-full h-48 relative">
+                         <div className="w-full h-48 relative overflow-hidden rounded-md">
                             {mainImageSrc ? (
                               <Image
                                 src={mainImageSrc}
                                 alt={bd_news?.title}
-                                width={400}
-                                height={192}
-                                className="object-cover object-center w-full h-full rounded-md"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                fill
+                                className="object-cover object-center"
                               />
                             ) : null}
                           </div>                        
@@ -306,7 +307,7 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                                   const imgsrc = getPostImage(bd_news);
                                     return imgsrc ? (
                                     <Image
-                                      className='object-cover object-center w-full h-full rounded-lg'
+                                      className='object-cover object-center rounded-lg'
                                       src={imgsrc}
                                       alt="thumbnail"
                                       width={200}
@@ -348,14 +349,14 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                    const mainImageSrc = getPostImage(politics_news);
                    return (
                         <div key={index}  className=" overflow-hidden border-b-2 h-auto">
-                          <div className="w-full h-48 relative">
+                          <div className="w-full h-48 relative overflow-hidden rounded-md">
                             {mainImageSrc ? (
                               <Image
                                 src={mainImageSrc}
                                 alt={politics_news?.title}
-                                width={400}
-                                height={192}
-                                className="object-cover object-center w-full h-full rounded-md"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                fill
+                                className="object-cover object-center"
                               />
                             ) : null}
                           </div>
@@ -382,7 +383,7 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                                   const imgsrc = getPostImage(politics_news);
                                     return imgsrc ? (
                                     <Image
-                                      className='object-cover object-center w-full h-full rounded-lg'
+                                      className='object-cover object-center rounded-lg'
                                       src={imgsrc}
                                       alt="thumbnail"
                                       width={200}
@@ -423,17 +424,16 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
 
                   {crime?.slice(0,1).map((crime_news, index) => (
                       <div key={index} className=" overflow-hidden border-b-2">
-                        <div className="w-full h-48 relative">
+                        <div className="w-full h-48 relative overflow-hidden rounded-md">
                           {(() => {
                                const imgsrc = getPostImage(crime_news);
                                  return imgsrc ? (
                                  <Image
                                   src={imgsrc}
                                   alt={crime_news?.title}
-                                   width={400}
-                                   height={192}
-                                  // fill
-                                  className="object-cover object-center w-full h-full rounded-md"
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                  fill
+                                  className="object-cover object-center"
                                  />
                                ) : null;
                              })()}
@@ -462,7 +462,7 @@ const BaPoCrime = ({ bangladeshNews, politics, crime }) => {
                                const imgsrc = getPostImage(crime_news);
                                  return imgsrc ? (
                                  <Image
-                                  className='object-cover object-center w-full h-full rounded-md'
+                                  className='object-cover object-center rounded-md'
                                   src={imgsrc}
                                   alt="thumbnail"
                                   width={200}

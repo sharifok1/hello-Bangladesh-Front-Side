@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FormatTimeAgo } from '@/components/FormateTimeAgo/FormateTimeAgo';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation, Autoplay } from 'swiper/modules';
+import { Pagination, Navigation } from 'swiper/modules';
 import Link from 'next/link';
 import api from '@/lib/api';
 import Image from 'next/image';
@@ -35,6 +35,7 @@ const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
                                 <Image
                                 src={imgsrc}
                                 alt={science?.title}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 fill
                                 className="object-cover object-center w-full h-full rounded-md"
                                 />
@@ -115,6 +116,7 @@ const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
                                 <Image
                                 src={imgsrc}
                                 alt={engineering_news?.title}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 fill
                                 className="object-cover object-center w-full h-full rounded-md"
                                 />
@@ -196,6 +198,7 @@ const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
                                 <Image
                                 src={imgsrc}
                                 alt={health_news?.title}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 fill
                                 className="object-cover object-center w-full h-full rounded-md"
                                 />
@@ -277,6 +280,7 @@ const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
                                 <Image
                                 src={imgsrc}
                                 alt={successStory_news?.title}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 fill
                                 className="object-cover object-center w-full h-full rounded-md"
                                 />
@@ -402,6 +406,7 @@ const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
                                       className='object-cover object-center w-full h-full rounded-lg'
                                       src={imgsrc}
                                       alt="thumbnail"
+                                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                       width={200}
                                       height={128}
                                     />
@@ -449,6 +454,7 @@ const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
                                 <Image
                                 src={imgsrc}
                                 alt={engineering_news?.title}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 width={400}
                                 height={192}
                                 className="object-cover object-center rounded-md"
@@ -531,6 +537,7 @@ const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
                                 <Image
                                 src={imgsrc}
                                 alt={health_news?.title}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 width={400}
                                 height={192}
                                 className="object-cover object-center h-full w-full rounded-md"
@@ -611,6 +618,7 @@ const SciEngHelSuc = ({ sciencenews, engineering, health, successStory }) => {
                                 <Image
                                 src={imgsrc}
                                 alt={successStory_news?.title}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 width={400}
                                 height={192}
                                 className="object-cover object-center w-full h-full rounded-md"

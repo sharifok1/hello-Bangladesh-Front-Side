@@ -3,11 +3,10 @@ import { Noto_Sans_Bengali } from 'next/font/google';
 
 const notoSansBengali = Noto_Sans_Bengali({
   subsets: ['bengali'],
-  weight: ['400', '700'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   preload: true,
   fallback: ['system-ui', 'arial'],
-  adjustFontFallback: true,
 });
 import PushNotificationButton from '../components/PushNotification/PushNotificationButton'
 import Script from 'next/script'
@@ -16,26 +15,10 @@ import { generateOrganizationSchema, generateWebsiteSchema, generateNavigationSc
 
 
 export const metadata = {
-  metadataBase: new URL('https://hellobd.news'),
   title: 'HelloBD News - বাংলাদেশের সর্বশেষ সংবাদ, খবর ও আপডেট',
   description: 'HelloBD News বাংলাদেশের প্রধান অনলাইন সংবাদ পোর্টাল। সর্বশেষ জাতীয়, আন্তর্জাতিক, রাজনীতি, খেলাধুলা, বিনোদন এবং আরও অনেক বিষয়ের খবর পড়ুন।',
-  keywords: ['বাংলাদেশ সংবাদ', 'খবর', 'HelloBD', 'জাতীয় খবর', 'আন্তর্জাতিক খবর', 'রাজনীতি', 'খেলাধুলা', 'বিনোদন'],
-  authors: [{ name: 'HelloBD News' }],
-  creator: 'HelloBD News',
-  publisher: 'HelloBD News',
   alternates: {
     canonical: 'https://hellobd.news',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
   icons: {
     icon: '/favicon.ico',
@@ -48,23 +31,6 @@ export const metadata = {
     siteName: 'HelloBD News',
     locale: 'bn_BD',
     type: 'website',
-    images: [
-      {
-        url: '/hellobd_logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'HelloBD News Logo',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'HelloBD News - বাংলাদেশের সর্বশেষ সংবাদ',
-    description: 'বাংলাদেশের প্রধান অনলাইন সংবাদ পোর্টাল',
-    images: ['/hellobd_logo.png'],
-  },
-  verification: {
-    google: 'your-google-verification-code', // Add your Google Search Console verification code
   },
 }
 
@@ -81,9 +47,13 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#2E3195" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.svg" />
         
-        {/* Performance: Preconnect to API domain only */}
+        {/* Performance: Preconnect to API domain */}
         <link rel="preconnect" href="https://dev.hellobd.news" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://dev.hellobd.news" />
+        
+        {/* Preconnect to Google services */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         
         {/* Organization Schema */}
         <script
@@ -104,14 +74,33 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body suppressHydrationWarning>
-        {/* Google Analytics - Load after page interactive */}
+        {/* Suppress preload warnings in development */}
         <Script
-          strategy="afterInteractive"
+          id="suppress-preload-warnings"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined') {
+                const originalWarn = console.warn;
+                console.warn = function(...args) {
+                  if (args[0]?.includes?.('preloaded using link preload but not used')) {
+                    return;
+                  }
+                  originalWarn.apply(console, args);
+                };
+              }
+            `,
+          }}
+        />
+        
+        {/* Google Analytics - Load with lower priority */}
+        <Script
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtag/js?id=G-XH6PWW5JT4"
         />
         <Script
           id="google-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

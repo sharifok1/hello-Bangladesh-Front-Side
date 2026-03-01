@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect} from 'react';
-import { usePathname } from 'next/navigation';
 import Image from "next/image";
 import logo from "../../../assets/hellobd_logo.svg";
 import { FaYoutube, FaFacebookF, FaEnvelope, FaBars , FaTimes, FaSearch } from "react-icons/fa";        
@@ -12,25 +11,23 @@ import api from "@/lib/api";
 
 
 export default function Header() {
+  
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOtherDropdownOpen, setIsOtherDropdownOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [searchLoading, setSearchLoading] = useState(false);
+  // const [searchLoading, setSearchLoading] = useState(false);
 
   const [scrollY, setScrollY] = useState(0);
 
 
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const searchUrl = "https://dev.hellobd.news/api/frontend/search";
   // menu api url here
    const [mainMenuItems, setMainMenuItems] = useState([]);
    const [subMenuItems, setSubMenuItems] = useState([]);
   const [mounted, setMounted] = useState(false);
-
-  //  const MainMenuItemsurl = "https://dev.hellobd.news/api/frontend/main-categories";
-  //  const SubMenuItemsurl = "https://dev.hellobd.news/api/frontend/other-categories";
 
 
    useEffect(() => {
@@ -69,12 +66,7 @@ export default function Header() {
 
         const isTopBarHidden = scrollY > 50; // Hide after 50px scroll
 
-  
-  const isActive = (href) => {
-    if (!pathname) return false;
-    if (href === '/') return pathname === '/';
-    return pathname.startsWith(href);
-  };
+
   // deterministic Bengali date formatter to avoid SSR/CSR locale mismatches
   const bengaliWeekdays = ['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
   const bengaliMonths = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
@@ -128,12 +120,12 @@ useEffect(() => {
 useEffect(() => {
   if (!searchQuery || !searchQuery.trim()) {
     setSearchResults([]);
-    setSearchLoading(false);
+    // setSearchLoading(false);
     return;
   }
 
   const controller = new AbortController();
-  setSearchLoading(true);
+  // setSearchLoading(true);
   const id = setTimeout(() => {
     fetch(`${searchUrl}?q=${encodeURIComponent(searchQuery)}`, { signal: controller.signal })
       .then((res) => res.json())
@@ -145,7 +137,7 @@ useEffect(() => {
         if (err.name === 'AbortError') return;
         console.error('Search error:', err);
       })
-      .finally(() => setSearchLoading(false));
+      // .finally(() => setSearchLoading(false));
   }, 300);
 
   return () => {
@@ -154,6 +146,8 @@ useEffect(() => {
   };
 }, [searchQuery]);
   
+
+
 
   return (
     <header className="bg-white" suppressHydrationWarning>
