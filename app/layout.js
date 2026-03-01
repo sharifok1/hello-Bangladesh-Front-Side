@@ -46,27 +46,21 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2E3195" />
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.svg" />
-        
         {/* Performance: Preconnect to API domain */}
         <link rel="preconnect" href="https://dev.hellobd.news" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://dev.hellobd.news" />
-        
-        {/* Preconnect to Google services */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        
+        {/* Block search engines for testing */}
+        <meta name="robots" content="noindex, nofollow" />
         {/* Organization Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        
         {/* Website Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        
         {/* Navigation Schema for Sitelinks */}
         <script
           type="application/ld+json"
@@ -92,31 +86,6 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-        
-        {/* Google Analytics - Load with lower priority */}
-        <Script
-          strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=G-XH6PWW5JT4"
-        />
-        <Script
-          id="google-analytics"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XH6PWW5JT4', {
-                page_path: window.location.pathname,
-                send_page_view: true,
-                cookie_flags: 'SameSite=None;Secure',
-                allow_google_signals: true,
-                allow_ad_personalization_signals: true
-              });
-            `,
-          }}
-        />
-        
         <PushNotificationButton />
         {children}
       </body>
