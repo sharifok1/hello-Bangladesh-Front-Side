@@ -36,7 +36,11 @@ async function proxyGet(path, search) {
 
   // Fetch from backend
   try {
-    const res = await fetch(target, { method: 'GET' });
+    // Disable Next.js data cache for large responses (>2MB limit)
+    const res = await fetch(target, { 
+      method: 'GET',
+      cache: 'no-store' // Bypass Next.js data cache
+    });
     const contentType = res.headers.get('content-type') || '';
     const body = await res.text();
 

@@ -3,7 +3,7 @@ export async function generateMetadata({ params }) {
   
   try {
     const res = await fetch(`https://dev.hellobd.news/api/frontend/post/${slug}`, {
-      next: { revalidate: 300 },
+      cache: 'no-store', // Disable Next.js data cache (responses >2MB)
       headers: {
         'Cache-Control': 'public, max-age=300, stale-while-revalidate=600'
       }

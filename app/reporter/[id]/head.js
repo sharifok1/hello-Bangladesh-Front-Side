@@ -12,7 +12,9 @@ export default async function Head({ params }) {
   const origin = host ? `${proto}://${host}` : 'http://localhost:3000';
 
   try {
-    // const res = await fetch(`${origin}/api/frontend/reporter/${id}`);
+    const res = await fetch(`${origin}/api/frontend/reporter/${id}`, {
+      cache: 'no-store' // Disable Next.js data cache
+    });
     if (!res.ok) throw new Error('fetch failed');
     const data = await res.json();
     const reporter = data?.reporter || {};
