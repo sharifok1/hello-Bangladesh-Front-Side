@@ -3,7 +3,9 @@ process.noDeprecation = true;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {},
+  turbopack: {
+    root: __dirname,
+  },
   images: {
   remotePatterns: [
     {
