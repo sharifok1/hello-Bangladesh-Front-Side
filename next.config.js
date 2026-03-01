@@ -55,10 +55,10 @@ const nextConfig = {
 
   async rewrites() {
     return [
+      // Do NOT rewrite /api/frontend/* so Next.js handles the proxy route
       {
-        source: '/api/:path*',
+        source: '/api/:path((?!frontend/).*)',
         destination: 'https://dev.hellobd.news/api/:path*',
-        // destination: 'http://127.0.0.1:8000/api/:path*',
       },
       {
         source: '/storage/:path*',
